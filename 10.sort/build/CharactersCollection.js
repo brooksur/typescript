@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CharactersCollection = void 0;
-class CharactersCollection {
+const Sorter_1 = require("./Sorter");
+class CharactersCollection extends Sorter_1.Sorter {
     constructor(collection) {
+        super();
         this.collection = collection;
     }
     get length() {
@@ -15,12 +17,12 @@ class CharactersCollection {
         return leftChar > rightChar;
     }
     swap(leftIndex, rightIndex) {
-        const collection = this.collection.split("");
+        const collection = this.collection.split('');
         const leftChar = collection[leftIndex];
         const rightChar = collection[rightIndex];
         collection[leftIndex] = rightChar;
         collection[rightIndex] = leftChar;
-        this.collection = collection.join("");
+        this.collection = collection.join('');
     }
 }
 exports.CharactersCollection = CharactersCollection;
