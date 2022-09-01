@@ -8,7 +8,9 @@ class WinsAnalysis {
     }
     run(matches) {
         let wins = 0;
+        console.log(matches);
         for (let match of matches) {
+            console.log(match[1]);
             if (match[1] === this.team && match[5] === MatchResult_1.MatchResult.HomeWin) {
                 wins++;
             }
