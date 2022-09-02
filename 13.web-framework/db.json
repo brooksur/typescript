@@ -1,3 +1,14 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": 1,
+      "name": "Brooks Benson",
+      "age": 27
+    },
+    {
+      "id": 2,
+      "name": "Max Benson",
+      "age": 27
+    }
+  ]
 }
