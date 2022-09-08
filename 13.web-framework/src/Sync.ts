@@ -1,21 +1,23 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosPromise } from 'axios'
 
-export class Sync {
-  fetch(): void {
-    axios
-      .get(`http://localhost:3000/users/${this.get('id')}`)
-      .then((res: AxiosResponse): void => {
-        this.set(res.data)
-      })
+interface HasId {
+  id?: number
+}
+
+export class Sync<T extends HasId> {
+  constructor(public rootUrl: string) {}
+
+  fetch(id: number): AxiosPromise {
+    return axios.get(`${this.rootUrl}/${id}`)
   }
 
-  save(): void {
-    const id = this.get('id')
+  save(data: T): AxiosPromise {
+    const id = data.id
 
-    if (id) {
-      axios.put(`http://localhost:3000/users/${this.get('id')}`, this.data)
+    if (typeof id === 'number') {
+      return axios.put(`${this.rootUrl}/${id}`, data)
     } else {
-      axios.post(`http://localhost:3000/users`, this.data)
+      return axios.post(`${this.rootUrl}`, data)
     }
   }
 }
