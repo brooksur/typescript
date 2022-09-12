@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from 'axios'
-import { User, UserProps } from './User'
 import { Eventing } from './Eventing'
 
 export class Collection<T, K> {
@@ -22,8 +21,8 @@ export class Collection<T, K> {
         const data = this.deserialize(value)
         this.models.push(data)
       })
-    })
 
-    this.trigger('change')
+      this.trigger('change')
+    })
   }
 }
