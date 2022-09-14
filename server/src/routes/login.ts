@@ -14,7 +14,7 @@ router.get('/login', (req: Request, res: Response) => {
         <input name="email" />
       </div>
       <div>
-        <label>Password</label>
+        <label>Password</label> 
         <input name="password" type="password" />
       </div>
       <button>Submit</button>
