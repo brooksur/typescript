@@ -1,7 +1,15 @@
-import e, { Router, Request, Response } from 'express'
+import { Router, Request, Response, NextFunction } from 'express'
 
 interface RequestWithBody extends Request {
   body: { [key: string]: string | undefined }
+}
+
+function requireAuth(req: Request, res: Response, next: NextFunction) {
+  if (req.session?.loggedIn === true) {
+    return next()
+  }
+
+  return res.status(401).send('Not authorized')
 }
 
 const router = Router()
@@ -54,6 +62,10 @@ router.get('/', (req: Request, res: Response) => {
       </div>
     `)
   }
+})
+
+router.get('/protected', [requireAuth], (req: Request, res: Response) => {
+  return res.send('Welcome to protected route')
 })
 
 export { router }

@@ -2,6 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = require("express");
+function requireAuth(req, res, next) {
+    var _a;
+    if (((_a = req.session) === null || _a === void 0 ? void 0 : _a.loggedIn) === true) {
+        return next();
+    }
+    return res.status(401).send('Not authorized');
+}
 const router = (0, express_1.Router)();
 exports.router = router;
 router.get('/login', (req, res) => {
@@ -12,7 +19,7 @@ router.get('/login', (req, res) => {
         <input name="email" />
       </div>
       <div>
-        <label>Password</label>
+        <label>Password</label> 
         <input name="password" type="password" />
       </div>
       <button>Submit</button>
@@ -51,4 +58,7 @@ router.get('/', (req, res) => {
       </div>
     `);
     }
+});
+router.get('/protected', [requireAuth], (req, res) => {
+    return res.send('Welcome to protected route');
 });
